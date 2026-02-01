@@ -1,3 +1,15 @@
+package loginmodule; /**
+ * This is the main class for running the login window. This class creates the database used for the login validation and
+ * displays the login GUI for use.
+ *
+ * CEN 4078 Programming Exercise 1
+ * File Name: LoginDemoMain.java
+ *
+ * @author Shaquita Puckett
+ * @version 1.0
+ * @since 2026-01-01
+ */
+
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -19,6 +31,5 @@ public class LoginDemoMain {
         } catch (IOException e) {
             System.out.println("Could not print credentials to User Database.");
         }
-
     }
 }
