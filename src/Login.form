@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="LoginGUI">
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="4" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties>
+      <background color="-16777216"/>
+      <minimumSize width="500" height="180"/>
+      <opaque value="true"/>
+      <preferredSize width="500" height="180"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <grid id="e7dd7" binding="loginPanel" layout-manager="GridLayoutManager" row-count="9" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="3">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="2" fill="0" indent="1" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-16777216"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="c461c" class="javax.swing.JPasswordField" binding="userPasswordField">
+            <constraints>
+              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="225" height="25"/>
+                <maximum-size width="400" height="25"/>
+              </grid>
+            </constraints>
+            <properties>
+              <foreground color="-7763575"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="98057" class="javax.swing.JLabel" binding="passwordLabel">
+            <constraints>
+              <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Cascadia Code" size="12" style="1"/>
+              <foreground color="-1"/>
+              <text value="Password:"/>
+            </properties>
+          </component>
+          <component id="da60c" class="javax.swing.JLabel" binding="usernameLabel">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Cascadia Code" size="12" style="1"/>
+              <foreground color="-1"/>
+              <text value="Username:"/>
+            </properties>
+          </component>
+          <component id="9dd83" class="javax.swing.JTextField" binding="userNameField">
+            <constraints>
+              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="225" height="25"/>
+                <maximum-size width="400" height="25"/>
+              </grid>
+            </constraints>
+            <properties>
+              <foreground color="-7763575"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="fe604" class="javax.swing.JLabel" binding="mfaLabl">
+            <constraints>
+              <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Cascadia Code" size="12" style="1"/>
+              <foreground color="-1"/>
+              <text value="MFA:"/>
+            </properties>
+          </component>
+          <component id="7f134" class="javax.swing.JTextField" binding="mfaTextField">
+            <constraints>
+              <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="225" height="25"/>
+                <maximum-size width="400" height="25"/>
+              </grid>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="8d5d" class="javax.swing.JLabel" binding="userImgLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="2" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value=""/>
+              <verticalAlignment value="3"/>
+            </properties>
+          </component>
+          <component id="fb144" class="javax.swing.JLabel" binding="userImgMessagesLabel">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="2" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Cascadia Code" size="16" style="1"/>
+              <foreground color="-1"/>
+              <text value="Sign In"/>
+            </properties>
+          </component>
+          <vspacer id="bc52">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
+                <preferred-size width="15" height="25"/>
+              </grid>
+            </constraints>
+          </vspacer>
+        </children>
+      </grid>
+      <grid id="d44cf" binding="ngenImgPanel" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-16777216"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="5db7" class="javax.swing.JLabel" binding="imageLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="c0ffb" class="javax.swing.JLabel" binding="imgMessageLabel">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Cascadia Code" size="36" style="1"/>
+              <foreground color="-1"/>
+              <text value="NGENius"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="40f0b" binding="welcomePanel" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="0" column="0" row-span="2" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-16777216"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="b11f2" class="javax.swing.JLabel" binding="welcomeLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-16777216"/>
+              <font name="Cascadia Code" size="24" style="1"/>
+              <foreground color="-1"/>
+              <text value="WELCOME"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="b4c59" binding="buttonPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="0" indent="1" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-16777216"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="9f508" class="javax.swing.JButton" binding="LOGINButton" default-binding="true">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="200" height="35"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-12425294"/>
+              <font name="Cascadia Code" size="14" style="1"/>
+              <foreground color="-1"/>
+              <horizontalAlignment value="0"/>
+              <margin top="0" left="0" bottom="0" right="0"/>
+              <text value="LOGIN"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>
