@@ -15,26 +15,30 @@ import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Validation {
+public class Validation implements ValidatorInterface{
     private String username = "";
     private char[] password;
     private String mfa = "";
+    private SecurityLogger logger;
 
     /**
      * Overloaded constructor to initialize the username, password and mfa variables
-     * @param username
-     * @param password
-     * @param mfa
+     * @param username String representing user's username
+     * @param password char array representing user's password
+     * @param mfa String representing multi-factor authentication
+     * @param logger ILogger object representing a logger for logging validation
      */
-    public Validation(String username, char[] password, String mfa) {
+    public Validation(String username, char[] password, String mfa, SecurityLogger logger) {
         setUsername(username);
         setPassword(password);
         setMFA(mfa);
+        setLogger(logger);
     }
 
     public void setUsername(String username) {this.username = username;}
     public void setPassword(char[] password) {this.password = password;}
     public void setMFA(String mfa) {this.mfa = mfa;}
+    public void setLogger(SecurityLogger logger) {this.logger = logger;}
 
     /**
      * Method used for SQL Injection prevention. It uses hasForbiddenCharacters() to check whether
@@ -42,6 +46,10 @@ public class Validation {
      * @return false if either the username or password contain forbidden characters, and true if neither has them
      */
     public boolean passesSQLInjection() {
+        if (hasForbiddenCharacters(username.toCharArray()) || hasForbiddenCharacters(password)){
+            logger.logEvent("LOGIN_ATTEMPT", username, false, "SQLINJECTIONDETECTED");
+        }
+        logger.logEvent("LOGIN_ATTEMPT", username, true);
         return !hasForbiddenCharacters(username.toCharArray()) && !hasForbiddenCharacters(password);
     }
 
@@ -70,6 +78,10 @@ public class Validation {
      * @return false if any of the rules fail, and true only if policy checks pass
      */
     public boolean passesPWPolicy() {
+        if (!hasDigitChar() || !hasCorrectPasswordLength() || !hasLowerCaseChar() || !hasUpperCaseChar()) {
+            logger.logEvent("LOGIN_ATTEMPT", username, false, "PASSWORDPOLICYVIOLATION");
+        }
+        logger.logEvent("LOGIN_ATTEMPT", username, true);
         return hasDigitChar() && hasCorrectPasswordLength() && hasLowerCaseChar() && hasUpperCaseChar();
     }
 
@@ -129,6 +141,10 @@ public class Validation {
         } catch (NumberFormatException e) {
             return false;
         }
+        if (!hasCorrectMFALength() || !hasNoIntOverflow(mfaConvert)) {
+            logger.logEvent("LOGIN_ATTEMPT", username, false, "MFAVIOLATION");
+        }
+        logger.logEvent("LOGIN_ATTEMPT", username, true);
         return hasCorrectMFALength() && hasNoIntOverflow(mfaConvert);
     }
 
@@ -171,14 +187,17 @@ public class Validation {
 
                 if ( (storedUsername.equals(username)) && (Arrays.equals(password, storedPassword.toCharArray())) ) {
                     scanner.close();
+                    logger.logEvent("LOGIN_ATTEMPT", username, true);
                     return true;
                 }
             }
             scanner.close();
         } catch (FileNotFoundException e) {
             System.out.println("Could not access User Database");
+            logger.logEvent("LOGIN_ATTEMPT", username, false, "COULDNOTACCESSDATABASEFORAUTHENTICATION");
             return false;
         }
+        logger.logEvent("LOGIN_ATTEMPT", username, false, "COULDNOTAUTHENTICATEUSER");
         return false;
     }
 

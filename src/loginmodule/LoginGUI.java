@@ -122,7 +122,8 @@ public class LoginGUI extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            Validation val = new Validation(userNameField.getText(), userPasswordField.getPassword(), mfaTextField.getText());
+            SecurityLogger logger = new SecurityLogger();
+            ValidatorInterface val = new Validation(userNameField.getText(), userPasswordField.getPassword(), mfaTextField.getText(), logger);
 
             if (val.passesSQLInjection() && val.passesPWPolicy() && val.passesMultiFactorAuthentication() ) {
 
