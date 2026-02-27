@@ -38,6 +38,7 @@ public class LoginGUI extends JFrame {
     private JLabel usernameIconLabel;
     private JLabel passwordIconLabel;
     private JLabel mfaIconLabel;
+    private JButton REGISTERbutton;
 
     /**
      * Constructor for setting up the window. Contains the methods for building the displayed images and creating the login button listener.
