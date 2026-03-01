@@ -143,19 +143,31 @@ public class Cryptographer {
     }
 
     /**
-     *
-     * @param c
-     * @return
+     * Private method to convert a letter to ASCII. Formula: c - 64
+     * @param c - the character to be converted
+     * @return an integer representing the ascii value of the letter
      */
     private int toASCIIFromLetter(char c) {
         return c - 64;
     }
 
+    /**
+     * Private method to convert a number to ASCII. Formula: c -48.
+     * @param c - the character to be converted
+     * @return an integer representing the ascii value of the number
+     */
     private int toASCIIFromNum(char c) {
         return c - 48;
     }
 
-
+    /**
+     * Overrided toString to return the correct string representation of encrypted and decrypted characters from a given
+     * list. If the nums element is 'D': cast to char and then convert to a number; If the nums element is 'L': cast to char
+     * and convert to a letter
+     * @param nums - a list of numbers representing a character
+     * @param types - a list of chars; 'D' for digit, 'L' for letter
+     * @return the correct string representation of encrypted and decrypted characters from the nums list
+     */
     public String toString(List<Integer> nums, List<Character> types) {
         StringBuilder result = new StringBuilder();
 

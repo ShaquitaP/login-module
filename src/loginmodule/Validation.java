@@ -42,7 +42,8 @@ public class Validation implements ValidatorInterface{
 
     /**
      * Method used for SQL Injection prevention. It uses hasForbiddenCharacters() to check whether
-     * the username and password have forbidden characters.
+     * the username and password have forbidden characters. This has been updated to include a logger
+     * to document whether the SQL Injection test passed or failed.
      * @return false if either the username or password contain forbidden characters, and true if neither has them
      */
     public boolean passesSQLInjection() {
@@ -74,7 +75,8 @@ public class Validation implements ValidatorInterface{
 
     /**
      * Method to check whether the password abides by the rules in the password policy. The method uses private helper methods:
-     * hasDigitChar(), hasCorrectPasswordLength(), hasUpperCaseChar() and hasLowerCaseChar().
+     * hasDigitChar(), hasCorrectPasswordLength(), hasUpperCaseChar() and hasLowerCaseChar(). This has been updated to include
+     * a logger to detail whether the password policy was a pass or failure.
      * @return false if any of the rules fail, and true only if policy checks pass
      */
     public boolean passesPWPolicy() {
@@ -129,7 +131,8 @@ public class Validation implements ValidatorInterface{
     /**
      * Method to check the MFA has the correct length and detects for integer overflow. It first tries to parse the MFA into
      * a Long variable to send to the method for checking int overflow. If the MFA cannot be parsed to Long, the method
-     * throws a NumberFormatException and immediately returns false.
+     * throws a NumberFormatException and immediately returns false. This has been updated to include a logger
+     * to detail whether the MultiFactor Authentication passed or failed.
      * @return false if the MFA cannot be parsed to Long or the length is wrong or integer overflow is detected,
      * and true if length == 10 and no integer overflow detected
      */
@@ -168,8 +171,9 @@ public class Validation implements ValidatorInterface{
     }
 
     /**
-     * Method for checking the username and password against the username and passwords in the datsbase.A FileNotFoundException
-     * is thrown if the database cannot be found
+     * Method for checking the username and password against the username and passwords in the database.A FileNotFoundException
+     * is thrown if the database cannot be found. This has been updated to include a logger to detail whether the user
+     * was authenticated or not, or if the database could not be accessed.
      * @return false if the database cannot be access or the user credentials cannot be authenticated against the database,
      * and true if the user credentials are found within the database
      */
