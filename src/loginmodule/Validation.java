@@ -6,7 +6,7 @@ package loginmodule; /**
  * File Name: Validation.java
  *
  * @author Shaquita Puckett
- * @version 1.0
+ * @version 2.0
  * @since 2026-01-02
  */
 
@@ -21,6 +21,8 @@ public class Validation implements ValidatorInterface{
     private String mfa = "";
     private SecurityLogger logger;
 
+    public Validation() {}
+
     /**
      * Overloaded constructor to initialize the username, password and mfa variables
      * @param username String representing user's username
@@ -32,6 +34,12 @@ public class Validation implements ValidatorInterface{
         setUsername(username);
         setPassword(password);
         setMFA(mfa);
+        setLogger(logger);
+    }
+
+    public Validation(String username, char[] password, SecurityLogger logger) {
+        setUsername(username);
+        setPassword(password);
         setLogger(logger);
     }
 
@@ -76,15 +84,19 @@ public class Validation implements ValidatorInterface{
     /**
      * Method to check whether the password abides by the rules in the password policy. The method uses private helper methods:
      * hasDigitChar(), hasCorrectPasswordLength(), hasUpperCaseChar() and hasLowerCaseChar(). This has been updated to include
-     * a logger to detail whether the password policy was a pass or failure.
+     * a logger to detail whether the password policy was a pass or failure. The update also includes new business rules
+     * to ensure the password is only digits and letters: (0-9a-zA-Z). Private helper method hasNoSpecialCharacters is used to
+     * check the new business requirement.
      * @return false if any of the rules fail, and true only if policy checks pass
      */
     public boolean passesPWPolicy() {
         if (!hasDigitChar() || !hasCorrectPasswordLength() || !hasLowerCaseChar() || !hasUpperCaseChar()) {
             logger.logEvent("LOGIN_ATTEMPT", username, false, "PASSWORDPOLICYVIOLATION");
         }
-        logger.logEvent("LOGIN_ATTEMPT", username, true);
-        return hasDigitChar() && hasCorrectPasswordLength() && hasLowerCaseChar() && hasUpperCaseChar();
+        else {
+            logger.logEvent("LOGIN_ATTEMPT", username, true);
+        }
+        return hasDigitChar() && hasCorrectPasswordLength() && hasLowerCaseChar() && hasUpperCaseChar() && hasNoSpecialCharacters();
     }
 
     /**
@@ -126,6 +138,19 @@ public class Validation implements ValidatorInterface{
             if (Character.isDigit(c)) {return true;}
         }
         return false;
+    }
+
+    /**
+     * Private method to check if the password has no special characters
+     * @return false if anything other than a digit or letter is found and true otherwise
+     */
+    private boolean hasNoSpecialCharacters() {
+        for (char c : password) {
+            if (!Character.isDigit(c) && !Character.isLetter(c)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -205,4 +230,15 @@ public class Validation implements ValidatorInterface{
         return false;
     }
 
+    public String passwordPolicy() {
+        return """
+                NGENius Password Requirements: \n
+                
+                * 8-12 characters \n
+                * One (1) Digit (0-9) \n
+                * One (1) lowercase letter (a-z) \n
+                * One (1) uppercase letter (A-Z) \n
+                * No special characters \n
+                """;
+    }
 }

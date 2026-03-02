@@ -29,8 +29,8 @@ public class LoginValidationWindow extends JFrame{
      * @param parent The parent class that handles the input and validation
      */
     public LoginValidationWindow(JFrame parent) {
-        final int WIDTH = 400;
-        final int HEIGHT = 300;
+        final int WIDTH = 500;
+        final int HEIGHT = 600;
         setContentPane(mainPanel);
         setTitle("Login Validation");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -38,7 +38,10 @@ public class LoginValidationWindow extends JFrame{
         setVisible(true);
         setSize(WIDTH, HEIGHT);
 
-        okayButton.addActionListener(e -> System.exit(0));
+        okayButton.addActionListener(e -> {
+            dispose();
+            parent.setVisible(true);
+        });
     }
 
     /**
@@ -61,7 +64,7 @@ public class LoginValidationWindow extends JFrame{
     /**
      * Method to change the message label to display a "Login Failed" message along with the emergency icon.
      */
-    public void displayFailureMessage() {
+    public void displayUserFailureMessage() {
         final int WIDTH = 25;
         final int LENGTH = 25;
 
@@ -71,6 +74,25 @@ public class LoginValidationWindow extends JFrame{
 
         String failureMes = "Login Failed";
         messageLabel.setText(failureMes);
+        messageIconLabel.setIcon(scaledMessageIcon);
+    }
+
+    public void displayPasswordFailureMessage(int attemptsRemaining) {
+
+        Validation val = new Validation();
+        final int WIDTH = 25;
+        final int LENGTH = 25;
+
+        ImageIcon messageIcon = new ImageIcon("src/resources/emergency.png");
+        Image messageImg = messageIcon.getImage().getScaledInstance(115, 115, Image.SCALE_SMOOTH);
+        ImageIcon scaledMessageIcon = new ImageIcon(messageImg);
+
+        String policy = val.passwordPolicy()
+                .replace("\n", "<br>")
+                .replace("*", "•");
+
+        String failureMes = "<html>" + policy + "<br>" + attemptsRemaining + " attempts remaining...</html>";
+        messageLabel.setText(failureMes + attemptsRemaining + " attempts remaining...");
         messageIconLabel.setIcon(scaledMessageIcon);
     }
 

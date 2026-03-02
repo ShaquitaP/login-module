@@ -61,6 +61,7 @@ public class LoginGUI extends JFrame {
         buildLoginIcons();
 
         LOGINButton.addActionListener(new LoginButtonListener());
+        REGISTERbutton.addActionListener(new RegisterButtonListener());
     }
 
     /**
@@ -135,15 +136,23 @@ public class LoginGUI extends JFrame {
                 }
                 else if (!val.authenticatesUser()) {
                     LoginValidationWindow valWindow = new LoginValidationWindow(LoginGUI.this);
-                    valWindow.displayFailureMessage();
+                    valWindow.displayUserFailureMessage();
                     valWindow.setVisible(true);
                 }
             }
             else if (!val.passesSQLInjection() || !val.passesPWPolicy() || !val.passesMultiFactorAuthentication()) {
                 LoginValidationWindow valWindow = new LoginValidationWindow(LoginGUI.this);
-                valWindow.displayFailureMessage();
+                valWindow.displayUserFailureMessage();
                 valWindow.setVisible(true);
             }
+        }
+    }
+
+    private static class RegisterButtonListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            RegisterGUI rg = new RegisterGUI();
         }
     }
 

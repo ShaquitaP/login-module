@@ -17,14 +17,18 @@ public class LoginDemoMain {
 
     public static void main(String[] args) {
         String[][] userDatabase = {
-                {"scientist", "+1:d21jB4'v"},
-                {"engineer", "G^5&hM52L94"},
-                {"security", "wyD%Z$737cO"}
+                {"scientist", "T34KH8s8Tl"},
+                {"engineer", "10bYxVXtH7"},
+                {"security", "i32lS4z3N7"}
         };
+
         try {
             PrintWriter writer = new PrintWriter("database.txt");
+            Cryptographer crypt = new Cryptographer();
+
             for (String[] userPair : userDatabase) {
-                writer.println(userPair[0] + "," + userPair[1]);
+                // uses Cryptographer class to encrypt before writing to database
+                writer.println(crypt.encrypt(userPair[0]) + "," + crypt.encrypt(userPair[1]) );
             }
             writer.close();
             LoginGUI lg = new LoginGUI();
