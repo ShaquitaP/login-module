@@ -15,6 +15,13 @@ public class DefaultPassword {
         random = new Random();
     }
 
+     /**
+     * Generates a random password that meets the NGENius password policy.
+     * The password characters are shuffled after generating to ensure
+     * the required characters are not always in the same position,
+     * making the password more secure.
+     * @return String representing the randomly generated default password
+     *  */
     public String generatePassword() {
         List<Character> passwordChars = new ArrayList<>();
 
