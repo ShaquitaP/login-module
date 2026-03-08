@@ -96,5 +96,18 @@ public class LoginValidationWindow extends JFrame{
         messageIconLabel.setIcon(scaledMessageIcon);
     }
 
+    public void displayDefaultPasswordMessage() {
+        DefaultPassword dp = new DefaultPassword();
+        final int WIDTH = 25;
+        final int LENGTH = 25;
+
+        ImageIcon messageIcon = new ImageIcon("src/resources/emergency.png");
+        Image messageImg = messageIcon.getImage().getScaledInstance(115, 115, Image.SCALE_SMOOTH);
+        ImageIcon scaledMessageIcon = new ImageIcon(messageImg);
+
+        String failureMes = dp.notifyUserMessage();
+        messageLabel.setText(failureMes);
+        messageIconLabel.setIcon(scaledMessageIcon);
+    }
 
 }

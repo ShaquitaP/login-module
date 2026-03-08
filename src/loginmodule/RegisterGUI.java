@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
 
@@ -29,7 +31,6 @@ public class RegisterGUI extends JFrame {
     private JLabel pwPolicy3;
     private JLabel pwPolicy4;
     private JButton registerButton;
-    private JLabel pwAttemptsLabel;
 
 
     public RegisterGUI() {
@@ -73,6 +74,12 @@ public class RegisterGUI extends JFrame {
         userImgLabel.setIcon(scaledUserIcon);
     }
 
+    /**
+     * Private class to handle the logic for the register button listerner. Once clicked, the input will be validated with
+     * the Validation class. The password is encrypted and stroed in the database. The user has 2 attempts to create
+     * the password. Once the attempts get to 0, the Default Passowrd class is called to create a default password for the user.
+     *
+     */
     private class RegisterButtonListener implements ActionListener{
         int attemptsRemaining = 2;
 
@@ -84,14 +91,14 @@ public class RegisterGUI extends JFrame {
                 LoginValidationWindow valWindow = new LoginValidationWindow(RegisterGUI.this);
 
                 try {
-                    PrintWriter writer = new PrintWriter("database.txt");
+                    PrintWriter writer = new PrintWriter(new FileWriter("database.txt"));
                     Cryptographer crypt = new Cryptographer();
                     writer.println(crypt.encrypt(userNameField.getText()) + "," + crypt.encrypt(Arrays.toString(userPasswordField.getPassword())));
                     writer.close();
                     valWindow.displaySuccessMessage(userNameField.getText());
                     valWindow.setVisible(true);
                 }
-                catch (FileNotFoundException ex) {
+                catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
             }
@@ -102,12 +109,31 @@ public class RegisterGUI extends JFrame {
                     valWindow.displayPasswordFailureMessage(attemptsRemaining);
                     valWindow.setVisible(true);
                 }
+                if (attemptsRemaining == 0) {
+                    DefaultPassword dp = new DefaultPassword();
+                    String defaultPW = dp.generatePassword();
+
+                    try {
+                        PrintWriter writer = new PrintWriter(new FileWriter("database.txt", true));
+                        Cryptographer crypt = new Cryptographer();
+                        writer.println(crypt.encrypt(userNameField.getText()) + "," + crypt.encrypt(defaultPW));
+                        writer.close();
+                        valWindow.displayDefaultPasswordMessage();
+                        valWindow.setVisible(true);
+                        registerButton.setEnabled(false);
+                    }
+                    catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+
+                }
 
             }
         }
     }
-
+    /**
     public static void main(String[] args) {
         RegisterGUI rg = new RegisterGUI();
     }
+     */
 }

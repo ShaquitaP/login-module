@@ -214,7 +214,13 @@ public class Validation implements ValidatorInterface{
                 String storedUsername = creds[0];
                 String storedPassword = creds[1];
 
-                if ( (storedUsername.equals(username)) && (Arrays.equals(password, storedPassword.toCharArray())) ) {
+                Cryptographer crypt = new Cryptographer();
+                String decryptedUsername = crypt.decrypt(storedUsername);
+                String decryptedPassword = crypt.decrypt(storedPassword);
+
+                if (decryptedUsername.equalsIgnoreCase(username) &&
+                        Arrays.equals(decryptedPassword.toUpperCase().toCharArray(),
+                                new String(password).toUpperCase().toCharArray())) {
                     scanner.close();
                     logger.logEvent("LOGIN_ATTEMPT", username, true);
                     return true;
@@ -222,7 +228,6 @@ public class Validation implements ValidatorInterface{
             }
             scanner.close();
         } catch (FileNotFoundException e) {
-            System.out.println("Could not access User Database");
             logger.logEvent("LOGIN_ATTEMPT", username, false, "COULDNOTACCESSDATABASEFORAUTHENTICATION");
             return false;
         }
