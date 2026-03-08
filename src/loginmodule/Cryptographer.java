@@ -94,7 +94,8 @@ public class Cryptographer {
      * @return (C + k) mod 26
      */
     private int encryptVigenere(char c, int element) {
-        return (toASCIIFromLetter(c) + aKey.get(element)) % 26;
+        int result = (toASCIIFromLetter(c) + aKey.get(element)) % 26;
+        return result == 0 ? 26 : result; // if result is 0, return 26 (Z) to maintain 1-26 range
     }
 
     /**
